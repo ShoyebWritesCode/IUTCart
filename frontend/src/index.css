@@ -50,3 +50,7 @@ main {
 .btn-primary {
   background-color: #ff7235;
 }
+
+.img-large {
+  max-width: 100%;
+}

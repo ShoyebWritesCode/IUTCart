@@ -6,7 +6,7 @@ const data = {
       category: 'Tshirt',
       image: '/images/p1.jpg',
       price: 120,
-      countInStock: 10,
+      countInStock: 0,
       brand: 'ArtBoard',
       rating: 4.5,
       numReviews: 10,
