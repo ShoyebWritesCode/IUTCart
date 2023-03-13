@@ -1,7 +1,7 @@
 const data = {
   products: [
     {
-      _id: '1',
+      // _id: '1',
       name: 'RedHeaven Tshirt',
       slug: 'redheaven-tshirt',
       category: 'Tshirt',
@@ -14,7 +14,7 @@ const data = {
       description: 'High Quality Tshirt with Red Heaven Illustration.',
     },
     {
-      _id: '2',
+      // _id: '2',
       name: 'IUT Cat Tshirt',
       slug: 'iut-cat-tshirt',
       category: 'Tshirt',
@@ -27,7 +27,7 @@ const data = {
       description: 'High Quality Tshirt with Illustration.',
     },
     {
-      _id: '3',
+      // _id: '3',
       name: 'IUT Tshirt',
       slug: 'iut-tshirt',
       category: 'Tshirt',
@@ -40,7 +40,7 @@ const data = {
       description: 'High Quality Tshirt with Illustration.',
     },
     {
-      _id: '4',
+      // _id: '4',
       name: 'Tshirt',
       slug: 'tshirt',
       category: 'Tshirt',
