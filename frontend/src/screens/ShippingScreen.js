@@ -48,7 +48,7 @@ export default function ShippingScreen() {
       </Helmet>
       <CheckoutSteps step1 step2></CheckoutSteps>
       <div className="container small-container">
-        <h1 className="my-3">Shipping Address</h1>
+        <h1 className="my-3 mt-5">Shipping Address</h1>
         <Form onSubmit={submitHandler}>
           <Form.Group className="mb-3" controlId="fullname">
             <Form.Label>Full Name</Form.Label>
