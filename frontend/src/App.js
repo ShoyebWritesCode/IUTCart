@@ -27,12 +27,18 @@ function App() {
       <div className="d-flex flex-column site-container">
         <ToastContainer position="bottom-center" limit={1} />
         <header>
-          <Navbar bg="dark" variant="dark">
+          <Navbar
+            style={{ backgroundColor: '#8e44ad' }}
+            variant="dark"
+            className="justify-content-between"
+          >
             <Container>
               <LinkContainer to="/">
-                <Navbar.Brand>IUTCart</Navbar.Brand>
+                <Navbar.Brand>
+                  <strong>IUTCart</strong>
+                </Navbar.Brand>
               </LinkContainer>
-              <Nav className="me-auto">
+              <Nav>
                 <Link to="/cart" className="nav-link">
                   Cart
                   {cart.cartItems.length > 0 && (
