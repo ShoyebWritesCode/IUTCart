@@ -48,6 +48,7 @@ main {
 .btn-primary {
   background-color: #8e44ad;
   border: 0px;
+  border-radius: 4px;
 }
 
 .btn-primary:hover {
@@ -109,6 +110,7 @@ main {
   font-size: 14px;
   border: none;
   box-shadow: none;
+  border-radius: 4px;
 }
 
 .my-button:hover {
@@ -154,4 +156,45 @@ main {
   background-color: #8e44ad;
   border-radius: 20px;
   border: 3px solid #f5f5f5;
+}
+
+.hero-banner {
+  background-color: #f5f5f5;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 5rem;
+  border-radius: 10px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.hero-banner h1 {
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.hero-banner p {
+  font-size: 24px;
+  margin-bottom: 32px;
+}
+
+.hero-banner button {
+  font-size: 18px;
+  padding: 12px 24px;
+  background-color: #8e44ad;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.hero-banner button:hover {
+  background-color: #000;
+  color: #fff;
 }

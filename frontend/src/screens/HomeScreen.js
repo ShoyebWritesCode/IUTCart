@@ -7,6 +7,7 @@ import Product from '../components/Product';
 import { Helmet } from 'react-helmet-async';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
+import { Link } from 'react-router-dom';
 //import data from '../data';
 
 const reducer = (state, action) => {
@@ -49,9 +50,23 @@ function HomeScreen() {
         <title>IUTCart</title>
       </Helmet>
 
-      <h2>New Arrival 🔥</h2>
+      <div className="hero-banner">
+        <h1 style={{ color: '#8e44ad' }}>
+          Shop With Brotherhood, Unite Savings.
+        </h1>
+        <p>
+          An Ecommerce Platform for <strong>IUTIANS</strong>
+        </p>
+        <button
+          onClick={() => window.scrollTo({ top: 500, behavior: 'smooth' })}
+        >
+          Shop Now
+        </button>
+      </div>
 
-      <div className="products mt-3">
+      <h2 style={{ textAlign: 'center' }}>New Arrival 🔥</h2>
+
+      <div className="products mt-5">
         {loading ? (
           <LoadingBox />
         ) : error ? (
