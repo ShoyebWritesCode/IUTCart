@@ -81,3 +81,13 @@ main {
   height: 200px; /* Set the height of the image */
   object-fit: cover; /* Crop the image to fit the card */
 }
+
+.checkout-steps > div {
+  border-bottom: 0.2rem solid #a0a0a0;
+  color: #a0a0a0;
+}
+
+.checkout-steps > div.active {
+  border-bottom: 0.2 rem solid #f08000;
+  color: #f08000;
+}
