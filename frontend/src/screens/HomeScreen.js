@@ -48,11 +48,10 @@ function HomeScreen() {
       <Helmet>
         <title>IUTCart</title>
       </Helmet>
-      <div className="text-center">
-        <h1>New Products</h1>
-      </div>
 
-      <div className="products">
+      <h2>New Arrival 🔥</h2>
+
+      <div className="products mt-3">
         {loading ? (
           <LoadingBox />
         ) : error ? (

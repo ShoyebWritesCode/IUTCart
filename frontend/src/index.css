@@ -73,7 +73,6 @@ main {
   border: 1px solid #ccc; /* Add a border to the card */
   border-radius: 10px; /* Add rounded corners to the card */
   overflow: hidden; /* Hide any overflow content */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a box shadow */
 }
 
 .product-card-image {
@@ -90,4 +89,69 @@ main {
 .checkout-steps > div.active {
   border-bottom: 0.2 rem solid #f08000;
   color: #f08000;
+}
+
+.product-image {
+  width: 40rem; /* Make the image fill the card width */
+  height: 20rem; /* Set the height of the image */
+  object-fit: scale-down; /* Crop the image to fit the card */
+  background-color: #ccc;
+}
+
+.no-underline {
+  text-decoration: none;
+}
+
+.my-button {
+  background-color: #ffffff;
+  color: #000000;
+  border-radius: 5px;
+  font-size: 14px;
+  border: none;
+  box-shadow: none;
+}
+
+.my-button:hover {
+  background-color: #000000;
+  color: #fff;
+}
+
+.zoom {
+  transition: transform 0.2s;
+  box-shadow: none;
+}
+
+.zoom:hover {
+  box-shadow: 0px 0px 10px #b961de52;
+  transform: scale(1.05);
+}
+
+.footer {
+  background-color: #8e44ad;
+  font-size: 14px;
+  color: #fff;
+  padding: 20px;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.mt-10 {
+  margin-top: 10rem;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f5f5f5;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #8e44ad;
+  border-radius: 20px;
+  border: 3px solid #f5f5f5;
 }

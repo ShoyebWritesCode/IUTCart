@@ -16,6 +16,8 @@ import SigninScreen from './screens/SigninScreen';
 import ShippingScreen from './screens/ShippingScreen';
 import SignupScreen from './screens/SignupScreen';
 import PaymentMethodScreen from './screens/PaymentMethodScreen';
+import Button from 'react-bootstrap/esm/Button';
+import { Row, Col } from 'react-bootstrap';
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -40,12 +42,22 @@ function App() {
             <Container>
               <LinkContainer to="/">
                 <Navbar.Brand>
-                  <strong>IUTCart</strong>
+                  <img
+                    src={'/logo.png'}
+                    alt="Logo"
+                    width="90px"
+                    height="50px"
+                  />
                 </Navbar.Brand>
               </LinkContainer>
               <Nav>
                 <Link to="/cart" className="nav-link">
-                  Cart
+                  <img
+                    src={'/cart.png'}
+                    alt="Cart"
+                    width="25px"
+                    height="25px"
+                  />
                   {cart.cartItems.length > 0 && (
                     <Badge pill bg="danger">
                       {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
@@ -71,7 +83,9 @@ function App() {
                   </NavDropdown>
                 ) : (
                   <Link className="nav-link" to="/signin">
-                    Sign In
+                    <Button className="my-button" variant="primary">
+                      Sign In
+                    </Button>
                   </Link>
                 )}
               </Nav>
@@ -91,8 +105,38 @@ function App() {
             </Routes>
           </Container>
         </main>
-        <footer>
-          <div className="text-center">All rights reserved</div>
+        <footer className="footer mt-10">
+          <Container className="mt-3">
+            <Row className="justify-content-center">
+              <Col md={2}>
+                <h5>About Us</h5>
+                <p>
+                  IUTCart is as ecommerce platform where IUTIANS can buy and
+                  sell goodies.
+                </p>
+              </Col>
+              <Col md={2}>
+                <h5>Customer Service</h5>
+                <ul>
+                  <li>FAQ</li>
+                  <li>Contact Us</li>
+                  <li>Privacy Policy</li>
+                  <li>Terms of Use</li>
+                </ul>
+              </Col>
+              <Col md={2}>
+                <h5>Follow Us</h5>
+                <ul>
+                  <li>Facebook</li>
+                  <li>Twitter</li>
+                  <li>Instagram</li>
+                </ul>
+              </Col>
+              <Col md={2} auto>
+                <img src={'/logo.png'} alt="Logo" width="90px" height="50px" />
+              </Col>
+            </Row>
+          </Container>
         </footer>
       </div>
     </BrowserRouter>
