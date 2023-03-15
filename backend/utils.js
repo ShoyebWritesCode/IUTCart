@@ -1,5 +1,12 @@
 import jwt from 'jsonwebtoken';
+import mg from 'mailgun-js';
 
+export const baseUrl = () =>
+  process.env.BASE_URL
+    ? process.env.BASE_URL
+    : process.env.NODE_ENV !== 'production'
+    ? 'http://localhost:3000'
+    : 'http://sandboxdd0bfead77e84afab2c8385de20794bd.mailgun.org';
 export const generateToken = (user) => {
   return jwt.sign(
     {
@@ -14,3 +21,8 @@ export const generateToken = (user) => {
     }
   );
 };
+export const mailgun = () =>
+  mg({
+    apiKey: process.env.MAILGUN_API_KEY,
+    domain: process.env.MAILGUN_DOMIAN,
+  });
