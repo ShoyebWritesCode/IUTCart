@@ -75,11 +75,13 @@ function ProductScreen() {
     <div>
       <Row>
         <Col md={6}>
-          <img
-            className="product-image"
-            src={product.image}
-            alt={product.name}
-          ></img>
+          <div className="product-image-bg">
+            <img
+              className="product-image img-zoom"
+              src={product.image}
+              alt={product.name}
+            ></img>
+          </div>
         </Col>
         <Col md={3}>
           <ListGroup variant="flush">
