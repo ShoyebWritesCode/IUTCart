@@ -17,6 +17,7 @@ import ShippingScreen from './screens/ShippingScreen';
 import SignupScreen from './screens/SignupScreen';
 import PaymentMethodScreen from './screens/PaymentMethodScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
+import OrderScreen from './screens/OrderScreen';
 import Button from 'react-bootstrap/esm/Button';
 import { Row, Col } from 'react-bootstrap';
 import ForgetPasswordScreen from './screens/ForgetPasswordScreen';
@@ -103,6 +104,7 @@ function App() {
               <Route path="/signin" element={<SigninScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
               <Route path="/placeorder" element={<PlaceOrderScreen />} />
+              <Route path="/order/:id" element={<OrderScreen />}></Route>
               <Route
                 path="/forget-password"
                 element={<ForgetPasswordScreen />}
