@@ -216,3 +216,42 @@ main {
   background-color: #000;
   color: #fff;
 }
+
+.search-container {
+  position: relative;
+  display: inline-block;
+}
+
+.search-input {
+  width: 300px;
+  border: none;
+  border-radius: 8px;
+  background-color: #f1f1f1;
+  font-size: 16px;
+  color: #333;
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  color: #666;
+  cursor: pointer;
+}
+
+.search-icon:hover {
+  color: #333;
+}
+
+.search-input::placeholder {
+  color: #999;
+}
+
+.search-input:focus {
+  border: #00ff2f;
+}
+
+.text-bold {
+  font-weight: bold;
+}
