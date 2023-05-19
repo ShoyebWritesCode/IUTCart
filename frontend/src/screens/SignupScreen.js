@@ -22,13 +22,30 @@ export default function SignupScreen() {
 
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { userInfo } = state;
+
+  const passwordRegex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/;
+
   const submitHandler = async (e) => {
     e.preventDefault();
-    e.preventDefault();
+
+    if (!email.includes('@iut-dhaka.edu')) {
+      toast.error('You must use an IUT email to register.');
+      return;
+    }
+
+    if (!password.match(passwordRegex)) {
+      toast.error(
+        'Password must be at least 8 characters long, contain at least one capital letter, one small letter, and one special character.'
+      );
+      return;
+    }
+
     if (password !== confirmPassword) {
       toast.error('Passwords do not match');
       return;
     }
+
     try {
       const { data } = await Axios.post('/api/users/signup', {
         name,
@@ -36,6 +53,7 @@ export default function SignupScreen() {
         password,
         confirmPassword,
       });
+
       ctxDispatch({ type: 'USER_SIGNIN', payload: data });
       localStorage.setItem('userInfo', JSON.stringify(data));
       navigate(redirect || '/');
@@ -71,7 +89,11 @@ export default function SignupScreen() {
             type="email"
             required
             onChange={(e) => setEmail(e.target.value)}
+            isInvalid={!email.includes('@iut-dhaka.edu')}
           />
+          <Form.Control.Feedback type="invalid">
+            You must use an IUT email to register.
+          </Form.Control.Feedback>
         </Form.Group>
         <Form.Group className="mb-3" controlId="password">
           <Form.Label>Password</Form.Label>
@@ -79,16 +101,20 @@ export default function SignupScreen() {
             type="password"
             required
             onChange={(e) => setPassword(e.target.value)}
+            isInvalid={!password.match(passwordRegex)}
           />
-
-          <Form.Group className="mb-3" controlId="confirmPassword">
-            <Form.Label>Confirm Password</Form.Label>
-            <Form.Control
-              type="Password"
-              required
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-          </Form.Group>
+          <Form.Control.Feedback type="invalid">
+            Password must be at least 8 characters long, contain at least one
+            capital letter, one small letter, and one special character.
+          </Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="confirmPassword">
+          <Form.Label>Confirm Password</Form.Label>
+          <Form.Control
+            type="password"
+            required
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
         </Form.Group>
         <div className="mb-3">
           <Button type="submit">Sign Up</Button>

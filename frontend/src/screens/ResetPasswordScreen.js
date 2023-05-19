@@ -19,6 +19,9 @@ export default function ResetPasswordScreen() {
   const { state } = useContext(Store);
   const { userInfo } = state;
 
+  const passwordRegex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/;
+
   useEffect(() => {
     if (userInfo || !token) {
       navigate('/');
@@ -29,6 +32,12 @@ export default function ResetPasswordScreen() {
     e.preventDefault();
     if (password !== confirmPassword) {
       toast.error('Passwords do not match');
+      return;
+    }
+    if (!password.match(passwordRegex)) {
+      toast.error(
+        'Password must be at least 8 characters long, contain at least one capital letter, one small letter, and one special character.'
+      );
       return;
     }
     try {
@@ -56,7 +65,12 @@ export default function ResetPasswordScreen() {
             type="password"
             required
             onChange={(e) => setPassword(e.target.value)}
+            isInvalid={!password.match(passwordRegex)}
           />
+          <Form.Control.Feedback type="invalid">
+            Password must be at least 8 characters long, contain at least one
+            capital letter, one small letter, and one special character.
+          </Form.Control.Feedback>
         </Form.Group>
         <Form.Group className="mb-3" controlId="confirmPassword">
           <Form.Label>Confirm New Password</Form.Label>
