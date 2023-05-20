@@ -3,19 +3,27 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 export default function SearchBox() {
   const navigate = useNavigate();
   const [query, setQuery] = useState('');
   const submitHandler = (e) => {
     e.preventDefault();
-    navigate(query ? `/search/?query=${query}` : '/search');
-    e.target.reset();
+    //console.log(query);
+    //navigate(query ? `/search?query=${query}` : '/search');
+    if (query) {
+      navigate({
+        pathname: '/search',
+        search: `?query=${query}`,
+        hash: '#hash', // inject code value into template
+      });
+    }
+    //e.target.reset();
   };
 
   return (
-    <Form className="d-flex me-auto" onSubmit={submitHandler}>
+    <Form className="d-flex me-auto">
       <InputGroup className="search-input">
         <FormControl
           type="text"
@@ -27,9 +35,16 @@ export default function SearchBox() {
           aria-label="Search Products"
           aria-describedby="button-search"
         ></FormControl>
-        <Button variant="primary" type="submit" id="button-search">
-          <i className="fas fa-search"></i>
-        </Button>
+        <Link to={query ? `/search?query=${query}` : '/search'}>
+          <Button
+            variant="primary"
+            type="submit"
+            id="button-search"
+            //onClick={submitHandler}
+          >
+            <i className="fas fa-search"></i>
+          </Button>
+        </Link>
       </InputGroup>
     </Form>
   );
