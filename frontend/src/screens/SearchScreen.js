@@ -82,6 +82,8 @@ export default function SearchScreen() {
   const order = sp.get('order') || 'newest';
   const page = sp.get('page') || 1;
 
+  const [sortBy, setSortBy] = useState('newest');
+
   const [{ loading, error, products, pages, countProducts }, dispatch] =
     useReducer(reducer, {
       loading: true,
@@ -103,7 +105,7 @@ export default function SearchScreen() {
       }
     };
     fetchData();
-  }, [category, error, order, page, price, query, rating]);
+  }, [category, error, order, page, price, query, rating, sortBy]);
 
   const [categories, setCategories] = useState([]);
   useEffect(() => {
@@ -272,10 +274,11 @@ export default function SearchScreen() {
                 <Col className="text-end">
                   Sort by{' '}
                   <select
-                    value={order}
-                    onChange={(e) => {
-                      navigate(getFilterUrl({ order: e.target.value }));
-                    }}
+                    //value={order}
+                    //onChange={(e) => {
+                    //navigate(getFilterUrl({ order: e.target.value }));
+                    //}}
+                    onChange={(e) => setSortBy(e.target.value)}
                   >
                     <option value="newest">Newest Arrivals</option>
                     <option value="lowest">Price: Low to High</option>
@@ -284,8 +287,17 @@ export default function SearchScreen() {
                   </select>
                 </Col>
               </Row>
-              {products.length === 0 && (
+
+              {products?.length === 0 ? (
                 <MessageBox>No Product Found</MessageBox>
+              ) : (
+                <Row>
+                  {products?.map((product) => (
+                    <Col sm={6} lg={4} className="mb-3" key={product._id}>
+                      <Product product={product}></Product>
+                    </Col>
+                  ))}
+                </Row>
               )}
 
               <Row>
@@ -295,27 +307,11 @@ export default function SearchScreen() {
                   </Col>
                 ))}
               </Row>
-
-              <div>
-                {[...Array(pages).keys()].map((x) => (
-                  <LinkContainer
-                    key={x + 1}
-                    className="mx-1"
-                    to={getFilterUrl({ page: x + 1 })}
-                  >
-                    <Button
-                      className={Number(page) === x + 1 ? 'text-bold' : ''}
-                      variant="light"
-                    >
-                      {x + 1}
-                    </Button>
-                  </LinkContainer>
-                ))}
-              </div>
             </>
           )}
         </Col>
       </Row>
+         
     </div>
   );
 }
