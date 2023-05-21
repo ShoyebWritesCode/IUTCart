@@ -109,7 +109,7 @@ productRouter.post(
   })
 );
 
-const PAGE_SIZE = 4;
+const PAGE_SIZE = 6;
 
 productRouter.get(
   '/admin',
@@ -122,7 +122,8 @@ productRouter.get(
 
     const products = await Product.find()
       .skip(pageSize * (page - 1))
-      .limit(pageSize);
+      .limit(pageSize)
+      .sort({ createdAt: -1 });
     const countProducts = await Product.countDocuments();
     res.send({
       products,

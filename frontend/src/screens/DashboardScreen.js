@@ -7,6 +7,7 @@ import MessageBox from '../components/MessageBox';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
+import Chart from 'react-google-charts';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -98,6 +99,40 @@ export default function DashboardScreen() {
               </Card>
             </Col>
           </Row>
+          <div className="my-3">
+            <h2>Sales</h2>
+            {summary.dailyOrders.length === 0 ? (
+              <MessageBox>No Sale</MessageBox>
+            ) : (
+              <Chart
+                width="100%"
+                height="400px"
+                chartType="AreaChart"
+                loader={<div>Loading Chart...</div>}
+                data={[
+                  ['Date', 'Sales'],
+                  ...summary.dailyOrders.map((x) => [x._id, x.sales]),
+                ]}
+              ></Chart>
+            )}
+          </div>
+          <div className="my-3">
+            <h2>Categories</h2>
+            {summary.productCategories.length === 0 ? (
+              <MessageBox>No Category</MessageBox>
+            ) : (
+              <Chart
+                width="100%"
+                height="400px"
+                chartType="PieChart"
+                loader={<div>Loading Chart...</div>}
+                data={[
+                  ['Category', 'Products'],
+                  ...summary.productCategories.map((x) => [x._id, x.count]),
+                ]}
+              ></Chart>
+            )}
+          </div>
         </>
       )}
     </div>

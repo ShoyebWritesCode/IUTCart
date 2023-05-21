@@ -12,7 +12,9 @@ orderRouterSeller.get(
   isAuth,
   isSeller,
   expressAsyncHandler(async (req, res) => {
-    const orders = await Order.find().populate('user', 'name');
+    const orders = await Order.find({ user: req.query.userId })
+      .populate('user', 'name')
+      .sort({ createdAt: -1 });
     res.send(orders);
   })
 );

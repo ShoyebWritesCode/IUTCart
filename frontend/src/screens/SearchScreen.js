@@ -175,6 +175,8 @@ export default function SearchScreen() {
             <ul
               style={{
                 listStyleType: 'none',
+                padding: '0',
+                margin: '0',
               }}
             >
               <li>
@@ -214,6 +216,9 @@ export default function SearchScreen() {
             <ul
               style={{
                 listStyleType: 'none',
+
+                padding: '2px',
+                margin: '2px',
               }}
             >
               <li>
@@ -253,6 +258,8 @@ export default function SearchScreen() {
             <ul
               style={{
                 listStyleType: 'none',
+                padding: '2px',
+                margin: '2px',
               }}
             >
               {ratings.map((r) => {

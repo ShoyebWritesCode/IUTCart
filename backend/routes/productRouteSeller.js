@@ -6,7 +6,7 @@ import { isAuth, isAdmin, isSeller } from '../utils.js';
 const productRouterSeller = express.Router();
 
 productRouterSeller.get('/', async (req, res) => {
-  const products = await Product.find();
+  const products = await Product.find().sort({ createdAt: -1 });
   res.send(products);
 });
 

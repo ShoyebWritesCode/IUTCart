@@ -93,10 +93,10 @@ function App() {
                   {userInfo ? (
                     <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
                       <LinkContainer to="/profile">
-                        <NavDropdown.Item>User Profile</NavDropdown.Item>
+                        <NavDropdown.Item>Edit Profile</NavDropdown.Item>
                       </LinkContainer>
                       <LinkContainer to="/orderhistory">
-                        <NavDropdown.Item>Order History</NavDropdown.Item>
+                        <NavDropdown.Item>Purchase History</NavDropdown.Item>
                       </LinkContainer>
                       <NavDropdown.Divider />
                       <Link
@@ -116,7 +116,10 @@ function App() {
                   )}
 
                   {userInfo && !userInfo.isAdmin && (
-                    <NavDropdown title="Seller" id="seller-nav-dropdown">
+                    <NavDropdown
+                      title="Manage My Brand"
+                      id="seller-nav-dropdown"
+                    >
                       <LinkContainer to="/seller/products">
                         <NavDropdown.Item>Products</NavDropdown.Item>
                       </LinkContainer>
@@ -127,7 +130,10 @@ function App() {
                   )}
 
                   {userInfo && userInfo.isAdmin && (
-                    <NavDropdown title="Admin" id="admin-nav-dropdown">
+                    <NavDropdown
+                      title="Manage as Admin"
+                      id="admin-nav-dropdown"
+                    >
                       <LinkContainer to="/admin/dashboard">
                         <NavDropdown.Item>Dashboard</NavDropdown.Item>
                       </LinkContainer>
@@ -285,7 +291,13 @@ function App() {
               </Col>
               <Col md={2}>
                 <h5>Customer Service</h5>
-                <ul>
+                <ul
+                  style={{
+                    listStyleType: 'none',
+                    padding: '0',
+                    margin: '0',
+                  }}
+                >
                   <li>FAQ</li>
                   <li>Contact Us</li>
                   <li>Privacy Policy</li>
@@ -294,7 +306,13 @@ function App() {
               </Col>
               <Col md={2}>
                 <h5>Follow Us</h5>
-                <ul>
+                <ul
+                  style={{
+                    listStyleType: 'none',
+                    padding: '0',
+                    margin: '0',
+                  }}
+                >
                   <li>Facebook</li>
                   <li>Twitter</li>
                   <li>Instagram</li>
