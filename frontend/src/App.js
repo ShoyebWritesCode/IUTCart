@@ -29,11 +29,14 @@ import ProtectedRoute from './components/ProtectedRoute';
 import DashboardScreen from './screens/DashboardScreen';
 import AdminRoute from './components/AdminRoute';
 import ProductListScreen from './screens/ProductListScreen';
+import ProductListScreenSeller from './screens/ProductListScreenSeller';
 import ProductEditScreen from './screens/ProductEditScreen';
 import OrderListScreen from './screens/OrderListScreen';
 import UserListScreen from './screens/UserListScreen';
 import UserEditScreen from './screens/UserEditScreen';
 import SearchScreen from './screens/SearchScreen';
+import SellerRoute from './components/SellerRoute';
+import ProductEditScreenSeller from './screens/ProductEditScreenSeller';
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -110,6 +113,18 @@ function App() {
                       </Button>
                     </Link>
                   )}
+
+                  {userInfo && !userInfo.isAdmin && (
+                    <NavDropdown title="Seller" id="seller-nav-dropdown">
+                      <LinkContainer to="/seller/products">
+                        <NavDropdown.Item>Products</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/seller/orders">
+                        <NavDropdown.Item>Orders</NavDropdown.Item>
+                      </LinkContainer>
+                    </NavDropdown>
+                  )}
+
                   {userInfo && userInfo.isAdmin && (
                     <NavDropdown title="Admin" id="admin-nav-dropdown">
                       <LinkContainer to="/admin/dashboard">
@@ -228,6 +243,31 @@ function App() {
                 }
               ></Route>
 
+              {/*Seller Routes */}
+              <Route
+                path="/seller/products"
+                element={
+                  <SellerRoute>
+                    <ProductListScreenSeller />
+                  </SellerRoute>
+                }
+              ></Route>
+              <Route
+                path="/seller/orders"
+                element={
+                  <SellerRoute>
+                    <OrderListScreen />
+                  </SellerRoute>
+                }
+              ></Route>
+              <Route
+                path="/seller/product/:id"
+                element={
+                  <SellerRoute>
+                    <ProductEditScreenSeller />
+                  </SellerRoute>
+                }
+              ></Route>
               <Route path="/" element={<HomeScreen />} />
             </Routes>
           </Container>

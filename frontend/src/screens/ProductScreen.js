@@ -153,6 +153,10 @@ function ProductScreen() {
               Description:
               <p>{product.description}</p>
             </ListGroup.Item>
+            <ListGroup.Item>
+              Brand:
+              <p>{product.brand}</p>
+            </ListGroup.Item>
           </ListGroup>
         </Col>
         <Col md={3}>

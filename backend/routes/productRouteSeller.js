@@ -3,17 +3,17 @@ import expressAsyncHandler from 'express-async-handler';
 import Product from '../models/productModel.js';
 import { isAuth, isAdmin, isSeller } from '../utils.js';
 
-const productRouter = express.Router();
+const productRouterSeller = express.Router();
 
-productRouter.get('/', async (req, res) => {
+productRouterSeller.get('/', async (req, res) => {
   const products = await Product.find();
   res.send(products);
 });
 
-productRouter.post(
+productRouterSeller.post(
   '/',
   isAuth,
-  isAdmin,
+  isSeller,
   expressAsyncHandler(async (req, res) => {
     const newProduct = new Product({
       name: 'sample name ' + Date.now(),
@@ -33,10 +33,10 @@ productRouter.post(
   })
 );
 
-productRouter.put(
+productRouterSeller.put(
   '/:id',
   isAuth,
-  isAdmin,
+  isSeller,
   expressAsyncHandler(async (req, res) => {
     const productId = req.params.id;
     const product = await Product.findById(productId);
@@ -57,10 +57,10 @@ productRouter.put(
   })
 );
 
-productRouter.delete(
+productRouterSeller.delete(
   '/:id',
   isAuth,
-  isAdmin,
+  isSeller,
   expressAsyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
     if (product) {
@@ -72,7 +72,7 @@ productRouter.delete(
   })
 );
 
-productRouter.post(
+productRouterSeller.post(
   '/:id/reviews',
   isAuth,
   expressAsyncHandler(async (req, res) => {
@@ -111,18 +111,18 @@ productRouter.post(
 
 const PAGE_SIZE = 4;
 
-productRouter.get(
-  '/admin',
+productRouterSeller.get(
+  '/allproducts',
   isAuth,
-  isAdmin,
+  isSeller,
   expressAsyncHandler(async (req, res) => {
     const { query } = req;
     const page = query.page || 1;
     const pageSize = query.pageSize || PAGE_SIZE;
 
-    const products = await Product.find()
-      .skip(pageSize * (page - 1))
-      .limit(pageSize);
+    const products = await Product.find({ user: query.userId });
+    //.skip(pageSize * (page - 1))
+    //.limit(pageSize);
     const countProducts = await Product.countDocuments();
     res.send({
       products,
@@ -133,7 +133,7 @@ productRouter.get(
   })
 );
 
-productRouter.get(
+productRouterSeller.get(
   '/search',
   expressAsyncHandler(async (req, res) => {
     const { query } = req;
@@ -207,14 +207,14 @@ productRouter.get(
     });
   })
 );
-productRouter.get(
+productRouterSeller.get(
   '/categories',
   expressAsyncHandler(async (req, res) => {
     const categories = await Product.find().distinct('category');
     res.send(categories);
   })
 );
-productRouter.get('/slug/:slug', async (req, res) => {
+productRouterSeller.get('/slug/:slug', async (req, res) => {
   const product = await Product.findOne({ slug: req.params.slug });
   if (product) {
     res.send(product);
@@ -222,7 +222,7 @@ productRouter.get('/slug/:slug', async (req, res) => {
     res.status(404).send({ message: 'Product Not Found' });
   }
 });
-productRouter.get('/:id', async (req, res) => {
+productRouterSeller.get('/:id', async (req, res) => {
   const product = await Product.findById(req.params.id);
   if (product) {
     res.send(product);
@@ -230,4 +230,4 @@ productRouter.get('/:id', async (req, res) => {
     res.status(404).send({ message: 'Product Not Found' });
   }
 });
-export default productRouter;
+export default productRouterSeller;
