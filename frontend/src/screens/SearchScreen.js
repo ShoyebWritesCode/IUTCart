@@ -37,15 +37,15 @@ const reducer = (state, action) => {
 
 const prices = [
   {
-    name: '$1 to $50',
+    name: '৳1 to ৳50',
     value: '1-50',
   },
   {
-    name: '$51 to $200',
+    name: '৳51 to ৳200',
     value: '51-200',
   },
   {
-    name: '$201 to $1000',
+    name: '৳201 to ৳1000',
     value: '201-1000',
   },
 ];
@@ -172,13 +172,22 @@ export default function SearchScreen() {
         <Col md={3}>
           <h3>Categories</h3>
           <div>
-            <ul>
+            <ul
+              style={{
+                listStyleType: 'none',
+              }}
+            >
               <li>
                 <Link
                   className={'all' === category ? 'text-bold' : ''}
                   to={getFilterUrl({ category: 'all' })}
+                  style={{
+                    textDecoration: 'none',
+                    color: 'black', // Change color to black
+                    marginBottom: '10px', // Add margin at the bottom
+                  }}
                 >
-                  Any
+                  All Items
                 </Link>
               </li>
               {categories.map((c) => {
@@ -187,6 +196,11 @@ export default function SearchScreen() {
                     <Link
                       className={c === category ? 'text-bold' : ''}
                       to={getFilterUrl({ category: c })}
+                      style={{
+                        textDecoration: 'none',
+                        color: 'black', // Change color to black
+                        marginBottom: '10px', // Add margin at the bottom
+                      }}
                     >
                       {c}
                     </Link>
@@ -197,11 +211,20 @@ export default function SearchScreen() {
           </div>
           <div>
             <h3>Price</h3>
-            <ul>
+            <ul
+              style={{
+                listStyleType: 'none',
+              }}
+            >
               <li>
                 <Link
                   className={'all' === price ? 'text-bold' : ''}
                   to={getFilterUrl({ price: 'all' })}
+                  style={{
+                    textDecoration: 'none',
+                    color: 'black', // Change color to black
+                    marginBottom: '10px', // Add margin at the bottom
+                  }}
                 >
                   Any
                 </Link>
@@ -212,6 +235,11 @@ export default function SearchScreen() {
                     <Link
                       to={getFilterUrl({ price: p.value })}
                       className={p.value === price ? 'text-bold' : ''}
+                      style={{
+                        textDecoration: 'none',
+                        color: 'black', // Change color to black
+                        marginBottom: '10px', // Add margin at the bottom
+                      }}
                     >
                       {p.name}
                     </Link>
@@ -221,8 +249,12 @@ export default function SearchScreen() {
             </ul>
           </div>
           <div>
-            <h3>Average Customer Review</h3>
-            <ul>
+            <h3>Ratings</h3>
+            <ul
+              style={{
+                listStyleType: 'none',
+              }}
+            >
               {ratings.map((r) => {
                 return (
                   <li key={r.name}>
@@ -231,6 +263,11 @@ export default function SearchScreen() {
                       className={
                         `${r.rating}` === `${rating}` ? 'text-bold' : ''
                       }
+                      style={{
+                        textDecoration: 'none',
+                        color: 'black', // Change color to black
+                        marginBottom: '10px', // Add margin at the bottom
+                      }}
                     >
                       <Rating caption={' & up'} rating={r.rating}></Rating>
                     </Link>
@@ -241,6 +278,11 @@ export default function SearchScreen() {
                 <Link
                   to={getFilterUrl({ rating: 'all' })}
                   className={rating === 'all' ? 'text-bold' : ''}
+                  style={{
+                    textDecoration: 'none',
+                    color: 'black', // Change color to black
+                    marginBottom: '10px', // Add margin at the bottom
+                  }}
                 >
                   <Rating caption={' & up'} rating={0}></Rating>
                 </Link>
@@ -258,7 +300,7 @@ export default function SearchScreen() {
               <Row className="justify-content-between mb-3">
                 <Col md={6}>
                   <div>
-                    {countProducts === 0 ? 'No' : countProducts} Results
+                    {countProducts === 0 ? 'No' : countProducts} Results Found
                     {query !== 'all' && ' : ' + query}
                     {category !== 'all' && ' : ' + category}
                     {price !== 'all' && ' : Price ' + price}
@@ -278,13 +320,20 @@ export default function SearchScreen() {
                   </div>
                 </Col>
                 <Col className="text-end">
-                  Sort by{' '}
+                  <span style={{ marginRight: '10px' }}>Sort by</span>
                   <select
-                    //value={order}
-                    //onChange={(e) => {
-                    //navigate(getFilterUrl({ order: e.target.value }));
-                    //}}
+                    // value={order}
+                    // onChange={(e) => {
+                    //   navigate(getFilterUrl({ order: e.target.value }));
+                    // }}
                     onChange={(e) => setSortBy(e.target.value)}
+                    style={{
+                      padding: '5px 10px',
+                      borderRadius: '5px',
+                      background: '#ffff',
+                      border: '.5px solid #ccc',
+                      transition: 'background 0.3s ease-in-out',
+                    }}
                   >
                     <option value="newest">Newest Arrivals</option>
                     <option value="lowest">Price: Low to High</option>
