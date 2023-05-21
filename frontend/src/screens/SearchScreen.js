@@ -23,6 +23,7 @@ const reducer = (state, action) => {
         products: action.payload.products,
         page: action.payload.page,
         pages: action.payload.pages,
+        brands: action.payload.brands,
         countProducts: action.payload.countProducts,
         loading: false,
       };
@@ -81,20 +82,23 @@ export default function SearchScreen() {
   const rating = sp.get('rating') || 'all';
   const order = sp.get('order') || 'newest';
   const page = sp.get('page') || 1;
+  const brand = sp.get('brand') || 'all';
 
   const [sortBy, setSortBy] = useState('newest');
 
-  const [{ loading, error, products, pages, countProducts }, dispatch] =
-    useReducer(reducer, {
+  const [{ loading, error, products, countProducts }, dispatch] = useReducer(
+    reducer,
+    {
       loading: true,
       error: '',
-    });
+    }
+  );
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          `/api/products/search?page=${page}&query=${query}&category=${category}&price=${price}&rating=${rating}&order=${order}`
+          `/api/products/search?page=${page}&query=${query}&category=${category}&price=${price}&rating=${rating}&order=${order}&brand=${brand}`
         );
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
       } catch (err) {
@@ -105,7 +109,7 @@ export default function SearchScreen() {
       }
     };
     fetchData();
-  }, [category, error, order, page, price, query, rating, sortBy]);
+  }, [category, error, order, page, price, query, rating, brand, sortBy]);
 
   const [categories, setCategories] = useState([]);
   useEffect(() => {
@@ -127,7 +131,8 @@ export default function SearchScreen() {
     const filterRating = filter.rating || rating;
     const filterPrice = filter.price || price;
     const sortOrder = filter.order || order;
-    return `/search?category=${filterCategory}&query=${filterQuery}&price=${filterPrice}&rating=${filterRating}&order=${sortOrder}&page=${filterPage}`;
+    const filterBrand = filter.brand || brand;
+    return `/search?category=${filterCategory}&query=${filterQuery}&price=${filterPrice}&rating=${filterRating}&order=${sortOrder}&page=${filterPage}&brand=${filterBrand}`;
   };
 
   const [loadingCategories, setLoadingCategories] = useState(true);
@@ -165,7 +170,7 @@ export default function SearchScreen() {
       </Helmet>
       <Row>
         <Col md={3}>
-          <h3>Department</h3>
+          <h3>Categories</h3>
           <div>
             <ul>
               <li>
@@ -216,7 +221,7 @@ export default function SearchScreen() {
             </ul>
           </div>
           <div>
-            <h3>Avg. Customer Review</h3>
+            <h3>Average Customer Review</h3>
             <ul>
               {ratings.map((r) => {
                 return (
@@ -261,6 +266,7 @@ export default function SearchScreen() {
                     {query !== 'all' ||
                     category !== 'all' ||
                     rating !== 'all' ||
+                    brand !== 'all' ||
                     price !== 'all' ? (
                       <Button
                         variant="light"
@@ -289,7 +295,7 @@ export default function SearchScreen() {
               </Row>
 
               {products?.length === 0 ? (
-                <MessageBox>No Product Found</MessageBox>
+                <MessageBox>No Products Found</MessageBox>
               ) : (
                 <Row>
                   {products?.map((product) => (
@@ -299,19 +305,10 @@ export default function SearchScreen() {
                   ))}
                 </Row>
               )}
-
-              <Row>
-                {products.map((product) => (
-                  <Col sm={6} lg={4} className="mb-3" key={product._id}>
-                    <Product product={product}></Product>
-                  </Col>
-                ))}
-              </Row>
             </>
           )}
         </Col>
       </Row>
-         
     </div>
   );
 }

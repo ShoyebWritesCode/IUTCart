@@ -22,6 +22,12 @@ export default function SearchBox() {
     //e.target.reset();
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      submitHandler(e);
+    }
+  };
+
   return (
     <Form className="d-flex me-auto">
       <InputGroup className="search-input">
@@ -31,20 +37,19 @@ export default function SearchBox() {
           className="search-input"
           id="q"
           onChange={(e) => setQuery(e.target.value)}
+          onKeyPress={handleKeyPress}
           placeholder="search products..."
           aria-label="Search Products"
           aria-describedby="button-search"
         ></FormControl>
-        <Link to={query ? `/search?query=${query}` : '/search'}>
-          <Button
-            variant="primary"
-            type="submit"
-            id="button-search"
-            //onClick={submitHandler}
-          >
-            <i className="fas fa-search"></i>
-          </Button>
-        </Link>
+        <Button
+          variant="primary"
+          type="submit"
+          id="button-search"
+          //onClick={submitHandler}
+        >
+          <i className="fas fa-search"></i>
+        </Button>
       </InputGroup>
     </Form>
   );
