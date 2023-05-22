@@ -129,8 +129,8 @@ userRouter.post(
 
       // Create a new Mailgun instance with your API key and domain
       const fg = mailgun({
-        apiKey: '9f7364332aa0b6773e6e9bf61f194824-b36d2969-66ef61df',
-        domain: 'sandboxdd0bfead77e84afab2c8385de20794bd.mailgun.org',
+        apiKey: 'd60b08f2dc70752e98b926b858db5a80-07ec2ba2-66f28d61',
+        domain: 'sandbox01fe5fe6a91246ef9ae3a368e2e0e10d.mailgun.org',
       });
       // console.log(`mail gese`);
       // Define your email data

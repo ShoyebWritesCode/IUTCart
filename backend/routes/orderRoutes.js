@@ -3,7 +3,7 @@ import expressAsyncHandler from 'express-async-handler';
 import Order from '../models/orderModel.js';
 import User from '../models/userModel.js';
 import Product from '../models/productModel.js';
-import { isAuth, isAdmin } from '../utils.js';
+import { isAuth, isAdmin, mailgun, payOrderEmailTemplate } from '../utils.js';
 
 const orderRouter = express.Router();
 
@@ -109,12 +109,39 @@ orderRouter.put(
   '/:id/deliver',
   isAuth,
   expressAsyncHandler(async (req, res) => {
-    const order = await Order.findById(req.params.id);
+    // const order = await Order.findById(req.params.id);
+    const order = await Order.findById(req.params.id).populate(
+      'user',
+      'email name'
+    );
     if (order) {
       order.isDelivered = true;
       order.deliveredAt = Date.now();
       await order.save();
-      res.send({ message: 'Order Delivered' });
+
+      const fg = mailgun({
+        apiKey: 'd60b08f2dc70752e98b926b858db5a80-07ec2ba2-66f28d61',
+        domain: 'sandbox01fe5fe6a91246ef9ae3a368e2e0e10d.mailgun.org',
+      });
+
+      // Define your email data
+      const data = {
+        from: 'IUTCart <iutcart@gmail.com>',
+        to: `${order.user.name} <${order.user.email}>`,
+        subject: `New order ${order._id}`,
+        html: payOrderEmailTemplate(order),
+      };
+
+      // Send the email
+      fg.messages().send(data, function (error, body) {
+        if (error) {
+          console.log(error);
+          res.status(500).send({ message: 'Error sending email' });
+        } else {
+          console.log(body);
+          res.send({ message: 'Order Delivered' });
+        }
+      });
     } else {
       res.status(404).send({ message: 'Order Not Found' });
     }
