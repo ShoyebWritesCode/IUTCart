@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs';
 import expressAsyncHandler from 'express-async-handler';
 import jwt from 'jsonwebtoken';
 import User from '../models/userModel.js';
-import { isAuth, isAdmin, generateToken, baseUrl } from '../utils.js';
+import { isAuth, isAdmin, isSeller, generateToken, baseUrl } from '../utils.js';
 import mailgun from 'mailgun-js';
 
 const userRouter = express.Router();
@@ -61,6 +61,7 @@ userRouter.put(
       user.name = req.body.name || user.name;
       user.email = req.body.email || user.email;
       user.isAdmin = Boolean(req.body.isAdmin);
+      user.isSeller = Boolean(req.body.isSeller);
       const updatedUser = await user.save();
       res.send({ message: 'User Updated', user: updatedUser });
     } else {
@@ -80,6 +81,7 @@ userRouter.post(
           name: user.name,
           email: user.email,
           isAdmin: user.isAdmin,
+          isSeller: user.isSeller,
           token: generateToken(user),
         });
         return;
@@ -103,6 +105,7 @@ userRouter.post(
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
+      isSeller: user.isSeller,
       token: generateToken(user),
     });
   })
@@ -219,6 +222,7 @@ userRouter.put(
         name: updatedUser.name,
         email: updatedUser.email,
         isAdmin: updatedUser.isAdmin,
+        isSeller: updatedUser.isSeller,
         token: generateToken(updatedUser),
       });
     } else {

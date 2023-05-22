@@ -241,7 +241,7 @@ export default function OrderScreen() {
                   </ListGroup.Item>
                 )}
 
-                {!userInfo.isAdmin && !order.isPaid && !order.isDelivered && (
+                {/* {userInfo.isSeller && !order.isPaid && !order.isDelivered && (
                   <ListGroup.Item>
                     {loadingDeliver && <LoadingBox></LoadingBox>}
                     <div className="d-grid">
@@ -250,7 +250,7 @@ export default function OrderScreen() {
                       </Button>
                     </div>
                   </ListGroup.Item>
-                )}
+                )} */}
               </ListGroup>
             </Card.Body>
           </Card>

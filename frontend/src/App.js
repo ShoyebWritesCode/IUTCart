@@ -115,16 +115,16 @@ function App() {
                     </Link>
                   )}
 
-                  {userInfo && !userInfo.isAdmin && (
+                  {userInfo && userInfo.isSeller && (
                     <NavDropdown
                       title="Manage My Brand"
                       id="seller-nav-dropdown"
                     >
                       <LinkContainer to="/seller/products">
-                        <NavDropdown.Item>Products</NavDropdown.Item>
+                        <NavDropdown.Item>Manage Products</NavDropdown.Item>
                       </LinkContainer>
                       <LinkContainer to="/seller/sellerOrder">
-                        <NavDropdown.Item>Orders</NavDropdown.Item>
+                        <NavDropdown.Item>Manage Orders</NavDropdown.Item>
                       </LinkContainer>
                     </NavDropdown>
                   )}

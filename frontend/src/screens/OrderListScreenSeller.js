@@ -69,7 +69,6 @@ export default function OrderListScreenSeller() {
           <thead>
             <tr>
               <th>ID</th>
-              <th>USER</th>
               <th>DATE</th>
               <th>TOTAL</th>
               <th>DELIVERED</th>
@@ -80,7 +79,6 @@ export default function OrderListScreenSeller() {
             {orders.map((order) => (
               <tr key={order._id}>
                 <td>{order._id}</td>
-                <td>{order.user ? order.user.name : 'DELETED USER'}</td>
                 <td>{order.createdAt.substring(0, 10)}</td>
                 <td>{order.totalPrice.toFixed(2)}</td>
 
